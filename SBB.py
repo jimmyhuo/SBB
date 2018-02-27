@@ -151,7 +151,7 @@ for strCurrentBlogPostID in arrBlogPost :
   strBlogPostBody  = strBlogPostBody.replace("real_src =", "src =")
 
   #Parse blog timestamp
-  strBlogPostTime  = getBetween(strPageCode, '<span class="time SG_txtc">(', ')</span><div class="turnBoxzz">')
+  strBlogPostTime  = getBetween(strPageCode, '<span class="time SG_txtc">(', ')</span>')
 
   #Write into local file
   strLocalFilename = "Post_" + str(intCounter) + "_" + strCurrentBlogPostID + ".html"
