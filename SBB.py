@@ -1,4 +1,3 @@
-#!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
 __version__ = '0.01'
@@ -53,8 +52,10 @@ def createIndexPage():
         strPageCode = f.read()
         f.close()
         
+        i = strPageCode.find("<em>2")
+        strBlogPostTime = strPageCode[i+4:i+23]
         strBlogPostTitle = getBetween(strPageCode, "<title>", "</title>")
-        strHTML4Index = strHTML4Index + '<li><a href="' + strLocalFilename + '">' + strBlogPostTitle + '</a></li>\n'
+        strHTML4Index = strHTML4Index + '<li><a href="' + strLocalFilename + '">' + strBlogPostTitle + '</a> <em>'+  strBlogPostTime +'</em></li>\n'
         
     strCurrentTimestamp = str(strftime("%Y-%m-%d %H:%M:%S"))
     strHTML4Index = "<html>\n<head>\n<meta http-equiv=""Content-Type"" content=""text/html; charset=utf-8"" />\n<title>" + strBlogName + "博客文章汇总</title>\n</head>\n<body>\n<h2>新浪博客：" + strBlogName + "</h2>\n<p>共" + str(intBlogPostCount) + "篇文章，最后更新：<em>" + strCurrentTimestamp + "</em></p>\n<ol>\n" + strHTML4Index + "\n</ol>\n</body>\n</html>"
@@ -160,7 +161,7 @@ for strCurrentBlogPostID in arrBlogPost :
   objFileArticle.write(strHTML4Post)
   objFileArticle.close
 
-  strHTML4Index = strHTML4Index + '<li><a href="' + strLocalFilename + '">' + strBlogPostTitle + '</a></li>\n'
+  strHTML4Index = strHTML4Index + '<li><a href="' + strLocalFilename + '">' + strBlogPostTitle + '</a> <em>'+  strBlogPostTime +'</em></li>\n'
 
   print intCounter , "/", intBlogPostCount
 
@@ -168,5 +169,5 @@ strCurrentTimestamp = str(strftime("%Y-%m-%d %H:%M:%S"))
 strHTML4Index = "<html>\n<head>\n<meta http-equiv=""Content-Type"" content=""text/html; charset=utf-8"" />\n<title>" + strBlogName + "博客文章汇总</title>\n</head>\n<body>\n<h2>新浪博客：" + strBlogName + "</h2>\n<p>共" + str(intBlogPostCount) + "篇文章，最后更新：<em>" + strCurrentTimestamp + "</em></p>\n<ol>\n" + strHTML4Index + "\n</ol>\n</body>\n</html>"
 objFileIndex = open("index.html", "w")
 objFileIndex.write(strHTML4Index);
-objFileIndex.close
+objFileIndex.close()
 #createIndexPage()
